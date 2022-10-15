@@ -61,7 +61,7 @@ namespace TicTacToe
                     lineText += GameBoard[row, col] + " ";
                 }
                                 
-;               Console.WriteLine(lineText);
+                Console.WriteLine(lineText);
             }
 
             Console.WriteLine("");
