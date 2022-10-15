@@ -23,13 +23,25 @@ namespace TicTacToe
             DrawBoard();
         }
         
-        public void AddMove(Program.PlayerChar pChar, int value, int[] position)
+        public bool AddMove(Program.PlayerChar pChar, int value, int[] position)
         {
+            bool bValidMove =  false;
 
-            GBoard[position[0], position[1]] = pChar.ToString();
+            if (GBoard[position[0], position[1]] == "_")
+            {
+                GBoard[position[0], position[1]] = pChar.ToString();
+                DrawBoard();
+                bValidMove = true;
+            }
+            else 
+            { 
+                bValidMove = false;
+                Console.WriteLine("");
+                Console.WriteLine("Invalid selection");
+                Console.WriteLine("");
+            }
 
-            DrawBoard();
-            IsGameOver();
+            return bValidMove;
         } 
         
         void DrawBoard()
@@ -60,32 +72,32 @@ namespace TicTacToe
 
             int row;
             int col;
-            bool matchRow = false;
-            string cellVal ="";
-            ;
-
+  
             for (row = 0; row < 3; row++)
             {
-                string prevCellVal = "";
-
-                for (col = 0; col < 3; col++)
+                string rowVals = GBoard[row, 0] + GBoard[row, 1] + GBoard[row, 2];
+                if (rowVals == "XXX" || rowVals == "OOO")
                 {
-                   
-                    cellVal = GBoard[row, col];
-
-                    if (prevCellVal != "")
-                    {
-                        if (cellVal == prevCellVal && cellVal != "_") { matchRow = true; }
-                        else { matchRow = false; }
-                    }
-                    prevCellVal = cellVal;
-                }
-                
-                if (matchRow == true) {
                     gameOver = true;
                     break;
                 }
             }
+
+            for (col = 0; col < 3; col++)
+            {
+                string rowVals = GBoard[0, col] + GBoard[1, col] + GBoard[2, col];
+                if (rowVals == "XXX" || rowVals == "OOO")
+                {
+                    gameOver = true;
+                    break;
+                }
+            }
+
+            string xVal1 = GBoard[0, 0] + GBoard[1, 1] + GBoard[2, 2];
+            if (xVal1 == "XXX" || xVal1 == "OOO") { gameOver = true; }
+
+            string xVal2 = GBoard[2, 0] + GBoard[1, 1] + GBoard[0, 2];
+            if (xVal2 == "XXX" || xVal2 == "OOO") { gameOver = true; }
 
             return gameOver;
         }

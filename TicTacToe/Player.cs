@@ -4,6 +4,7 @@ namespace TicTacToe
 {
     internal class Player
     {
+        public int GamesWon { get; set; }
 
         public int[] GetMove(string PlayerName)
         {
@@ -16,13 +17,12 @@ namespace TicTacToe
             
             if (isNumeric == true) // if isnumeric
             {
-                if (inputVal > 0 && inputVal < 3) // if 1-3
+                if (inputVal-1 >= 0 && inputVal-1 < 3) // if 1-3
                 {
                     position[0] = Convert.ToInt32(Convert.ToString(input))-1;
                 }
             }
             
-
             Console.WriteLine("");
 
             Console.Write(PlayerName + " - Please enter the Col # (1-3): ");
@@ -30,7 +30,7 @@ namespace TicTacToe
 
             if (isNumeric == true) // if isnumeric
             {
-                if (inputVal > 0 && inputVal < 3) // if 1-3
+                if (inputVal-1 >= 0 && inputVal-1 < 3) // if 1-3
                 {
                     position[1] = Convert.ToInt32(Convert.ToString(input)) - 1;
                 }
