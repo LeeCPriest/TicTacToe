@@ -14,12 +14,12 @@ namespace TicTacToe
             player[1] = new Player();
 
             bool turn = false;
-            bool gameIsOver = false;
+            Board.gameResult gameIsOver = Board.gameResult.noResult;
             bool validMove = false;
 
             board.InitBoard();
 
-            while (gameIsOver == false)
+            while (gameIsOver == Board.gameResult.noResult)
             {
                 int[] position = null;
                 int playerNum = Convert.ToInt32(turn);
@@ -31,13 +31,13 @@ namespace TicTacToe
                    validMove = board.AddMove(playerChar, Convert.ToInt32(turn), position);
                 }
 
-                gameIsOver = board.IsGameOver();
+                gameIsOver = board.IsGameOver(ref player[playerNum]);
 
                 validMove = false;
                 turn = !turn;
             }
-
-            Console.WriteLine("Game Over");
+             
+            Console.WriteLine("Game Over. Result: " + gameIsOver.ToString() );
             Console.ReadLine();
         }
     }

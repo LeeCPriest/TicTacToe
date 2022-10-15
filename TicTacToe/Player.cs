@@ -5,8 +5,7 @@ namespace TicTacToe
     internal class Player
     {
         public enum PlayerChar { X, O };
-
-        public int GamesWon { get; set; }
+        public int GamesWon { get; set; } 
 
         public int[] GetMove(string PlayerName)
         {

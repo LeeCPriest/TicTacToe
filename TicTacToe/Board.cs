@@ -4,8 +4,8 @@ namespace TicTacToe
 {
     internal class Board
     {
-        private string[,] GBoard = new string[3,3];
-        public enum position { Row, Col };
+        private string[,] GameBoard = new string[3,3];
+        public enum gameResult { noResult, X_wins, O_wins, Draw }
 
         public void InitBoard()
         {
@@ -16,7 +16,7 @@ namespace TicTacToe
             {
                 for (col = 0; col < 3; col++)
                 {
-                    GBoard[row,col] = "_";
+                    GameBoard[row,col] = "_";
                 }
             }
 
@@ -27,9 +27,9 @@ namespace TicTacToe
         {
             bool bValidMove =  false;
 
-            if (GBoard[position[0], position[1]] == "_")
+            if (GameBoard[position[0], position[1]] == "_")
             {
-                GBoard[position[0], position[1]] = pChar.ToString();
+                GameBoard[position[0], position[1]] = pChar.ToString();
                 DrawBoard();
                 bValidMove = true;
             }
@@ -38,7 +38,7 @@ namespace TicTacToe
                 bValidMove = false;
                 Console.WriteLine("");
                 Console.WriteLine("Invalid selection");
-                Console.WriteLine("");
+                DrawBoard();
             }
 
             return bValidMove;
@@ -49,6 +49,7 @@ namespace TicTacToe
             int row;
             int col;
 
+            Console.Clear();
             Console.WriteLine("");
 
             for(row = 0; row < 3; row++)
@@ -57,7 +58,7 @@ namespace TicTacToe
 
                 for (col = 0; col < 3; col++)
                 {
-                    lineText += GBoard[row, col] + " ";
+                    lineText += GameBoard[row, col] + " ";
                 }
                                 
 ;               Console.WriteLine(lineText);
@@ -66,38 +67,51 @@ namespace TicTacToe
             Console.WriteLine("");
         }
 
-        public bool IsGameOver()
+        public gameResult IsGameOver(ref Player player)
         {
-            bool gameOver = false;
+            gameResult result = gameResult.noResult;
 
             int row;
             int col;
                         
             for (row = 0; row < 3; row++)
             {
-                string rowVals = GBoard[row, 0] + GBoard[row, 1] + GBoard[row, 2];
-                if (rowVals == "XXX" || rowVals == "OOO")
+                string rowVals = GameBoard[row, 0] + GameBoard[row, 1] + GameBoard[row, 2];
+                if (rowVals == "XXX" )
                 {
-                    gameOver = true;
+                    result = gameResult.X_wins;
                     break;
                 }
+                if (rowVals == "OOO")
+                {
+                    result = gameResult.O_wins;
+                    break;
+                }
+
             }
 
             for (col = 0; col < 3; col++)
             {
-                string rowVals = GBoard[0, col] + GBoard[1, col] + GBoard[2, col];
-                if (rowVals == "XXX" || rowVals == "OOO")
+                string rowVals = GameBoard[0, col] + GameBoard[1, col] + GameBoard[2, col];
+                if (rowVals == "XXX" )
                 {
-                    gameOver = true;
+                    result = gameResult.X_wins;
+                    break;
+                }
+                if (rowVals == "OOO")
+                {
+                    result = gameResult.O_wins;
                     break;
                 }
             }
 
-            string xVal1 = GBoard[0, 0] + GBoard[1, 1] + GBoard[2, 2];
-            if (xVal1 == "XXX" || xVal1 == "OOO") { gameOver = true; }
+            string xVal1 = GameBoard[0, 0] + GameBoard[1, 1] + GameBoard[2, 2];
+            if (xVal1 == "XXX") { result = gameResult.X_wins; }
+            if (xVal1 == "OOO") { result = gameResult.O_wins; }
 
-            string xVal2 = GBoard[2, 0] + GBoard[1, 1] + GBoard[0, 2];
-            if (xVal2 == "XXX" || xVal2 == "OOO") { gameOver = true; }
+            string xVal2 = GameBoard[2, 0] + GameBoard[1, 1] + GameBoard[0, 2];
+            if (xVal1 == "XXX") { result = gameResult.X_wins; }
+            if (xVal1 == "OOO") { result = gameResult.O_wins; }
 
             bool noMoreMoves = true;
 
@@ -105,13 +119,13 @@ namespace TicTacToe
             {
                 for (col = 0; col < 3; col++)
                 {
-                    if (GBoard[row,col] == "_" ) { noMoreMoves = false; }
+                    if (GameBoard[row,col] == "_" ) { noMoreMoves = false; }
                 }
             }
 
-            if (noMoreMoves == true) { gameOver = true; }
+            if (noMoreMoves == true) { result = gameResult.Draw; }
 
-            return gameOver;
+            return result;
         }
         
     }
