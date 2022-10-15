@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace TicTacToe
 {
     internal class Program
     {
-        public enum PlayerChar { X, O };
 
         static void Main(string[] args)
         {
@@ -23,7 +23,7 @@ namespace TicTacToe
             {
                 int[] position = null;
                 int playerNum = Convert.ToInt32(turn);
-                Enum.TryParse(playerNum.ToString(), out PlayerChar playerChar);
+                Enum.TryParse(playerNum.ToString(), out Player.PlayerChar playerChar);
 
                 while (validMove == false)
                 {
@@ -37,9 +37,8 @@ namespace TicTacToe
                 turn = !turn;
             }
 
-            Console.WriteLine("Player has won");
+            Console.WriteLine("Game Over");
             Console.ReadLine();
-
         }
     }
 }

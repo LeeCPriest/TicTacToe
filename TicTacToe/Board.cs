@@ -16,14 +16,14 @@ namespace TicTacToe
             {
                 for (col = 0; col < 3; col++)
                 {
-                    GBoard[row, col] = "_";
+                    GBoard[row,col] = "_";
                 }
             }
 
             DrawBoard();
         }
         
-        public bool AddMove(Program.PlayerChar pChar, int value, int[] position)
+        public bool AddMove(Player.PlayerChar pChar, int value, int[] position)
         {
             bool bValidMove =  false;
 
@@ -72,7 +72,7 @@ namespace TicTacToe
 
             int row;
             int col;
-  
+                        
             for (row = 0; row < 3; row++)
             {
                 string rowVals = GBoard[row, 0] + GBoard[row, 1] + GBoard[row, 2];
@@ -98,6 +98,18 @@ namespace TicTacToe
 
             string xVal2 = GBoard[2, 0] + GBoard[1, 1] + GBoard[0, 2];
             if (xVal2 == "XXX" || xVal2 == "OOO") { gameOver = true; }
+
+            bool noMoreMoves = true;
+
+            for (row = 0; row < 3; row++)
+            {
+                for (col = 0; col < 3; col++)
+                {
+                    if (GBoard[row,col] == "_" ) { noMoreMoves = false; }
+                }
+            }
+
+            if (noMoreMoves == true) { gameOver = true; }
 
             return gameOver;
         }
