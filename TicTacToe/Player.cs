@@ -12,17 +12,29 @@ namespace TicTacToe
 
             Console.Write(PlayerName + " - Please enter the Row # (1-3): ");
             input = Console.ReadKey().KeyChar;
-            // if isnumeric
-            // if 1-3
-            position[0] = Convert.ToInt32(Convert.ToString(input))-1;
+            bool isNumeric = int.TryParse(input.ToString(), out int inputVal);
+            
+            if (isNumeric == true) // if isnumeric
+            {
+                if (inputVal > 0 && inputVal < 3) // if 1-3
+                {
+                    position[0] = Convert.ToInt32(Convert.ToString(input))-1;
+                }
+            }
+            
 
             Console.WriteLine("");
 
             Console.Write(PlayerName + " - Please enter the Col # (1-3): ");
             input = Console.ReadKey().KeyChar;
-            // if isnumeric
-            // if 1-3
-            position[1] = Convert.ToInt32(Convert.ToString(input))-1;
+
+            if (isNumeric == true) // if isnumeric
+            {
+                if (inputVal > 0 && inputVal < 3) // if 1-3
+                {
+                    position[1] = Convert.ToInt32(Convert.ToString(input)) - 1;
+                }
+            }
 
             Console.WriteLine("");
 
