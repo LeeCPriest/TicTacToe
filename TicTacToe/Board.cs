@@ -4,7 +4,10 @@ namespace TicTacToe
 {
     internal class Board
     {
+        private const string blankChar = "_";
+
         private string[,] GameBoard = new string[3,3];
+
         public enum gameResult { noResult, X_wins, O_wins, Draw }
 
         public void InitBoard()
@@ -16,7 +19,7 @@ namespace TicTacToe
             {
                 for (col = 0; col < 3; col++)
                 {
-                    GameBoard[row,col] = "_";
+                    GameBoard[row,col] = blankChar;
                 }
             }
 
@@ -27,7 +30,7 @@ namespace TicTacToe
         {
             bool bValidMove =  false;
 
-            if (GameBoard[position[0], position[1]] == "_")
+            if (GameBoard[position[0], position[1]] == blankChar)
             {
                 GameBoard[position[0], position[1]] = pChar.ToString();
                 DrawBoard();
@@ -73,7 +76,8 @@ namespace TicTacToe
 
             int row;
             int col;
-                        
+            bool noMoreMoves = true;
+
             for (row = 0; row < 3; row++)
             {
                 string rowVals = GameBoard[row, 0] + GameBoard[row, 1] + GameBoard[row, 2];
@@ -87,7 +91,7 @@ namespace TicTacToe
                     result = gameResult.O_wins;
                     break;
                 }
-
+                if (rowVals.Contains(blankChar) == true) { noMoreMoves = false; } // if a blank character is found, there are available moves remaining
             }
 
             for (col = 0; col < 3; col++)
@@ -112,16 +116,6 @@ namespace TicTacToe
             string xVal2 = GameBoard[2, 0] + GameBoard[1, 1] + GameBoard[0, 2];
             if (xVal1 == "XXX") { result = gameResult.X_wins; }
             if (xVal1 == "OOO") { result = gameResult.O_wins; }
-
-            bool noMoreMoves = true;
-
-            for (row = 0; row < 3; row++)
-            {
-                for (col = 0; col < 3; col++)
-                {
-                    if (GameBoard[row,col] == "_" ) { noMoreMoves = false; }
-                }
-            }
 
             if (noMoreMoves == true) { result = gameResult.Draw; }
 
