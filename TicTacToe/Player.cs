@@ -5,14 +5,16 @@ namespace TicTacToe
     internal class Player
     {
         public enum PlayerChar { X, O };
-        public int GamesWon { get; set; } 
+        public int GamesWon { get; set; }
+
+        public int plMyProperty { get; set; }
 
         public int[] GetMove(string PlayerName)
         {
             char input;
             int[] position =  new int[2];
 
-            Console.Write(PlayerName + " - Please enter the Row # (1-3): ");
+            StandardMessages.EnterMove(PlayerName, "Row");
             input = Console.ReadKey().KeyChar;
             bool isNumeric = int.TryParse(input.ToString(), out int inputVal);
             
@@ -26,8 +28,9 @@ namespace TicTacToe
             
             Console.WriteLine("");
 
-            Console.Write(PlayerName + " - Please enter the Col # (1-3): ");
+            StandardMessages.EnterMove(PlayerName, "Col");
             input = Console.ReadKey().KeyChar;
+            isNumeric = int.TryParse(input.ToString(), out inputVal);
 
             if (isNumeric == true) // if isnumeric
             {

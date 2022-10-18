@@ -39,8 +39,7 @@ namespace TicTacToe
             else 
             { 
                 bValidMove = false;
-                Console.WriteLine("");
-                Console.WriteLine("Invalid selection");
+                StandardMessages.InvalidSelection();
                 DrawBoard();
             }
 

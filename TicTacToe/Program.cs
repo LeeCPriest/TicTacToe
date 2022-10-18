@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using static TicTacToe.Player;
 
 namespace TicTacToe
 {
-    internal class Program
+    internal class Program : StandardMessages
     {
 
         static void Main(string[] args)
@@ -23,12 +24,12 @@ namespace TicTacToe
             {
                 int[] position = null;
                 int playerNum = Convert.ToInt32(turn);
-                Enum.TryParse(playerNum.ToString(), out Player.PlayerChar playerChar);
+                Enum.TryParse(playerNum.ToString(), out PlayerChar playerChar);
 
                 while (validMove == false)
                 {
-                   position = player[playerNum].GetMove("Player " + playerChar);
-                   validMove = board.AddMove(playerChar, Convert.ToInt32(turn), position);
+                    position = player[playerNum].GetMove("Player " + playerChar);
+                    validMove = board.AddMove(playerChar, Convert.ToInt32(turn), position);
                 }
 
                 gameIsOver = board.IsGameOver(ref player[playerNum]);
@@ -36,9 +37,8 @@ namespace TicTacToe
                 validMove = false;
                 turn = !turn;
             }
-             
-            Console.WriteLine("Game Over. Result: " + gameIsOver.ToString() );
-            Console.ReadLine();
+
+            StandardMessages.GameOver(gameIsOver);
         }
     }
 }
