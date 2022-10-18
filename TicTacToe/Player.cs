@@ -7,7 +7,7 @@ namespace TicTacToe
         public int GamesWon { get; set; }
         public PlayerChar pChar { get; set; }
 
-        public static void InitPlayer(ref Player[] player)
+        public static void InitPlayers(ref Player[] player)
         {
             int i;
 

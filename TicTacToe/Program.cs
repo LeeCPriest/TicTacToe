@@ -9,13 +9,13 @@ namespace TicTacToe
         static void Main(string[] args)
         {
             Board board = new Board();
+            board.InitBoard();
+
             Player[] player = null;
-            InitPlayer(ref player);
+            InitPlayers(ref player);
 
             bool turn = false;
             bool validMove = false;
-
-            board.InitBoard();
 
             while (board.gameResult == GameResult.noResult)
             {
