@@ -28,8 +28,6 @@ namespace TicTacToe
                     validMove = board.AddMove(player[playerNum], Convert.ToInt32(turn), position);
                 }
 
-                board.IsGameOver(ref player[playerNum]);
-
                 validMove = false;
                 turn = !turn;
             }
