@@ -4,10 +4,22 @@ namespace TicTacToe
 {
     internal class Player
     {
-        public enum PlayerChar { X, O };
         public int GamesWon { get; set; }
+        public PlayerChar pChar { get; set; }
 
-        public int plMyProperty { get; set; }
+        public static void InitPlayer(ref Player[] player)
+        {
+            int i;
+
+            player = new Player[2];
+
+            for (i=0; i<=1; i++)
+            {
+                player[i] = new Player();
+                player[i].pChar = (PlayerChar)i;
+            }
+
+        }
 
         public int[] GetMove(string PlayerName)
         {

@@ -5,9 +5,9 @@ namespace TicTacToe
     internal class StandardMessages
     {
                
-        public static void GameOver(Board.gameResult gameIsOver)
+        public static void GameOver(GameResult gameResult)
         {
-            Console.WriteLine("Game Over. Result: " + gameIsOver.ToString());
+            Console.WriteLine("Game Over. Result: " + gameResult.ToString());
             Console.ReadLine();
         }
 

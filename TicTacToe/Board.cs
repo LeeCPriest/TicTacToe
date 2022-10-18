@@ -8,7 +8,7 @@ namespace TicTacToe
 
         private string[,] GameBoard = new string[3,3];
 
-        public enum gameResult { noResult, X_wins, O_wins, Draw }
+        public GameResult gameResult { get; set; }
 
         public void InitBoard()
         {
@@ -23,16 +23,19 @@ namespace TicTacToe
                 }
             }
 
+            gameResult = GameResult.noResult;
+
             DrawBoard();
         }
         
-        public bool AddMove(Player.PlayerChar pChar, int value, int[] position)
+        public bool AddMove(Player player, int value, int[] position)
         {
             bool bValidMove =  false;
+            
 
             if (GameBoard[position[0], position[1]] == blankChar)
             {
-                GameBoard[position[0], position[1]] = pChar.ToString();
+                GameBoard[position[0], position[1]] = player.pChar.ToString();
                 DrawBoard();
                 bValidMove = true;
             }
@@ -42,6 +45,8 @@ namespace TicTacToe
                 StandardMessages.InvalidSelection();
                 DrawBoard();
             }
+
+            IsGameOver(ref player);
 
             return bValidMove;
         } 
@@ -69,9 +74,9 @@ namespace TicTacToe
             Console.WriteLine("");
         }
 
-        public gameResult IsGameOver(ref Player player)
+        public void IsGameOver(ref Player player)
         {
-            gameResult result = gameResult.noResult;
+            GameResult result = GameResult.noResult;
 
             int row;
             int col;
@@ -82,12 +87,12 @@ namespace TicTacToe
                 string rowVals = GameBoard[row, 0] + GameBoard[row, 1] + GameBoard[row, 2];
                 if (rowVals == "XXX" )
                 {
-                    result = gameResult.X_wins;
+                    result = GameResult.X_wins;
                     break;
                 }
                 if (rowVals == "OOO")
                 {
-                    result = gameResult.O_wins;
+                    result = GameResult.O_wins;
                     break;
                 }
                 if (rowVals.Contains(blankChar) == true) { noMoreMoves = false; } // if a blank character is found, there are available moves remaining
@@ -98,27 +103,27 @@ namespace TicTacToe
                 string rowVals = GameBoard[0, col] + GameBoard[1, col] + GameBoard[2, col];
                 if (rowVals == "XXX" )
                 {
-                    result = gameResult.X_wins;
+                    result = GameResult.X_wins;
                     break;
                 }
                 if (rowVals == "OOO")
                 {
-                    result = gameResult.O_wins;
+                    result = GameResult.O_wins;
                     break;
                 }
             }
 
             string xVal1 = GameBoard[0, 0] + GameBoard[1, 1] + GameBoard[2, 2];
-            if (xVal1 == "XXX") { result = gameResult.X_wins; }
-            if (xVal1 == "OOO") { result = gameResult.O_wins; }
+            if (xVal1 == "XXX") { result = GameResult.X_wins; }
+            if (xVal1 == "OOO") { result = GameResult.O_wins; }
 
             string xVal2 = GameBoard[2, 0] + GameBoard[1, 1] + GameBoard[0, 2];
-            if (xVal1 == "XXX") { result = gameResult.X_wins; }
-            if (xVal1 == "OOO") { result = gameResult.O_wins; }
+            if (xVal1 == "XXX") { result = GameResult.X_wins; }
+            if (xVal1 == "OOO") { result = GameResult.O_wins; }
 
-            if (noMoreMoves == true) { result = gameResult.Draw; }
+            if (result!= GameResult.X_wins && result !=GameResult.O_wins && noMoreMoves == true) { result = GameResult.Draw; }
 
-            return result;
+            gameResult = result;
         }
         
     }
