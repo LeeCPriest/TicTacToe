@@ -11,7 +11,7 @@ namespace TicTacToe
             IBoard board = Factory.CreateBoard();
             board.InitBoard();
 
-            IPlayer[] player = Factory.CreatePlayers(2);
+            IPlayer[] player = Factory.CreatePlayers();
             
             bool turn = false;
             bool validMove = false;

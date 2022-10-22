@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace TicTacToe
 {
@@ -9,13 +10,14 @@ namespace TicTacToe
             return new Board();
         }
 
-        public static IPlayer[] CreatePlayers(int numPlayers)
+        public static IPlayer[] CreatePlayers()
         {
             int i;
+            int numPlayers = Enum.GetNames(typeof(PlayerChar)).Length;
 
             Player[] newPlayer = new Player[numPlayers];
 
-            for (i = 0; i <= 1; i++)
+            for (i = 0; i < numPlayers; i++)
             {
                 newPlayer[i] = new Player();
                 newPlayer[i].pChar = (PlayerChar)i;
