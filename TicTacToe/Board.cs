@@ -2,11 +2,11 @@
 
 namespace TicTacToe
 {
-    internal class Board
+    internal class Board : IBoard
     {
         private const string blankChar = "_";
 
-        private string[,] GameBoard = new string[3,3];
+        private string[,] GameBoard = new string[3, 3];
 
         public GameResult gameResult { get; set; }
 
@@ -19,7 +19,7 @@ namespace TicTacToe
             {
                 for (col = 0; col < 3; col++)
                 {
-                    GameBoard[row,col] = blankChar;
+                    GameBoard[row, col] = blankChar;
                 }
             }
 
@@ -27,11 +27,11 @@ namespace TicTacToe
 
             DrawBoard();
         }
-        
-        public bool AddMove(Player player, int value, int[] position)
+
+        public bool AddMove(IPlayer player, int value, int[] position)
         {
-            bool bValidMove =  false;
-            
+            bool bValidMove = false;
+
 
             if (GameBoard[position[0], position[1]] == blankChar)
             {
@@ -39,8 +39,8 @@ namespace TicTacToe
                 DrawBoard();
                 bValidMove = true;
             }
-            else 
-            { 
+            else
+            {
                 bValidMove = false;
                 StandardMessages.InvalidSelection();
                 DrawBoard();
@@ -49,8 +49,8 @@ namespace TicTacToe
             IsGameOver(ref player);
 
             return bValidMove;
-        } 
-        
+        }
+
         void DrawBoard()
         {
             int row;
@@ -59,7 +59,7 @@ namespace TicTacToe
             Console.Clear();
             Console.WriteLine("");
 
-            for(row = 0; row < 3; row++)
+            for (row = 0; row < 3; row++)
             {
                 string lineText = "";
 
@@ -67,14 +67,14 @@ namespace TicTacToe
                 {
                     lineText += GameBoard[row, col] + " ";
                 }
-                                
+
                 Console.WriteLine(lineText);
             }
 
             Console.WriteLine("");
         }
 
-        public void IsGameOver(ref Player player)
+        public void IsGameOver(ref IPlayer player)
         {
             GameResult result = GameResult.noResult;
 
@@ -85,7 +85,7 @@ namespace TicTacToe
             for (row = 0; row < 3; row++)
             {
                 string rowVals = GameBoard[row, 0] + GameBoard[row, 1] + GameBoard[row, 2];
-                if (rowVals == "XXX" )
+                if (rowVals == "XXX")
                 {
                     result = GameResult.X_wins;
                     break;
@@ -101,7 +101,7 @@ namespace TicTacToe
             for (col = 0; col < 3; col++)
             {
                 string rowVals = GameBoard[0, col] + GameBoard[1, col] + GameBoard[2, col];
-                if (rowVals == "XXX" )
+                if (rowVals == "XXX")
                 {
                     result = GameResult.X_wins;
                     break;
@@ -121,10 +121,10 @@ namespace TicTacToe
             if (xVal1 == "XXX") { result = GameResult.X_wins; }
             if (xVal1 == "OOO") { result = GameResult.O_wins; }
 
-            if (result!= GameResult.X_wins && result !=GameResult.O_wins && noMoreMoves == true) { result = GameResult.Draw; }
+            if (result != GameResult.X_wins && result != GameResult.O_wins && noMoreMoves == true) { result = GameResult.Draw; }
 
             gameResult = result;
         }
-        
+
     }
 }

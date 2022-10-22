@@ -3,17 +3,16 @@ using static TicTacToe.Player;
 
 namespace TicTacToe
 {
-    internal class Program : StandardMessages
+    internal class Program
     {
 
         static void Main(string[] args)
         {
-            Board board = new Board();
+            IBoard board = Factory.CreateBoard();
             board.InitBoard();
 
-            Player[] player = null;
-            InitPlayers(ref player);
-
+            IPlayer[] player = Factory.CreatePlayers(2);
+            
             bool turn = false;
             bool validMove = false;
 
@@ -34,7 +33,5 @@ namespace TicTacToe
 
             StandardMessages.GameOver(board.gameResult);
         }
-
-
     }
 }
