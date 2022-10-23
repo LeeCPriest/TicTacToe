@@ -5,21 +5,31 @@ namespace TicTacToe
     internal class StandardMessages
     {
                
-        public static void GameOver(GameResult gameResult)
+        public static void GameOverMessage(GameResult gameResult, IPlayer[] player)
         {
             Console.WriteLine("Game Over. Result: " + gameResult.ToString());
-            Console.ReadLine();
+            Console.WriteLine("");
+            Console.Write($"{player[0].PlayerName} has won {player[0].GamesWon} games.");
+            Console.WriteLine("");
+            Console.Write($"{player[1].PlayerName} has won {player[1].GamesWon} games.");
+            Console.WriteLine("");
         }
 
-        public static void EnterMove(string PlayerName, string RowCol)
+        public static void EnterMoveMessage(IPlayer player, string RowCol)
         {
-            Console.Write($"{PlayerName} - Please enter the {RowCol} # (1-3): ");
+            Console.Write($"{player.PlayerName} - Please enter the {RowCol} # (1-3): ");
         }
 
-        public static void InvalidSelection()
+        public static void InvalidSelectionMessage()
         {
             Console.WriteLine("");
             Console.WriteLine("Invalid selection");
         }
+
+        public static void PlayAgainMessage()
+        {
+            Console.WriteLine("Would you like to play again? (Y/N)?");
+        }
+            
     }
 }

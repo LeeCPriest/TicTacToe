@@ -8,9 +8,9 @@ namespace TicTacToe
 
         private string[,] GameBoard = new string[3, 3];
 
-        public GameResult gameResult { get; set; }
+        public GameResult gameResult { get; private set; }
 
-        public void InitBoard()
+        public Board()
         {
             int row;
             int col;
@@ -28,10 +28,10 @@ namespace TicTacToe
             DrawBoard();
         }
 
+
         public bool AddMove(IPlayer player, int value, int[] position)
         {
             bool bValidMove = false;
-
 
             if (GameBoard[position[0], position[1]] == blankChar)
             {
@@ -42,7 +42,7 @@ namespace TicTacToe
             else
             {
                 bValidMove = false;
-                StandardMessages.InvalidSelection();
+                StandardMessages.InvalidSelectionMessage();
                 DrawBoard();
             }
 
@@ -51,7 +51,7 @@ namespace TicTacToe
             return bValidMove;
         }
 
-        void DrawBoard()
+        private void DrawBoard()
         {
             int row;
             int col;
@@ -122,9 +122,27 @@ namespace TicTacToe
             if (xVal1 == "OOO") { result = GameResult.O_wins; }
 
             if (result != GameResult.X_wins && result != GameResult.O_wins && noMoreMoves == true) { result = GameResult.Draw; }
+            else if (result != GameResult.noResult ) 
+            { player.UpdateWinCount(); }
+            
 
             gameResult = result;
         }
 
+        public bool PlayAgain()
+        {
+            string response = "";
+            Console.WriteLine("");
+
+            while (response.ToLower() != "y" && response.ToLower() != "n")
+            {
+                StandardMessages.PlayAgainMessage();
+                response = Console.ReadLine();
+            }
+
+            if (response.ToLower() == "y") { return true; }
+            else { return false; }
+
+        }
     }
 }

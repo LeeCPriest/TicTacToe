@@ -5,14 +5,23 @@ namespace TicTacToe
     internal class Player : IPlayer
     {
         public int GamesWon { get; set; }
-        public PlayerChar pChar { get; set; }
 
-        public int[] GetMove(string PlayerName)
+        public PlayerChar pChar { get; private set; }
+
+        public string PlayerName { get; private set; }
+
+        public Player(int playerNum)
+        {
+            pChar = (PlayerChar)playerNum;
+            PlayerName = "Player " + pChar.ToString();
+        }
+
+        public int[] GetMove()
         {
             char input;
             int[] position = new int[2];
 
-            StandardMessages.EnterMove(PlayerName, "Row");
+            StandardMessages.EnterMoveMessage(this, "Row");
             input = Console.ReadKey().KeyChar;
             bool isNumeric = int.TryParse(input.ToString(), out int inputVal);
 
@@ -26,7 +35,7 @@ namespace TicTacToe
 
             Console.WriteLine("");
 
-            StandardMessages.EnterMove(PlayerName, "Col");
+            StandardMessages.EnterMoveMessage(this, "Col");
             input = Console.ReadKey().KeyChar;
             isNumeric = int.TryParse(input.ToString(), out inputVal);
 
@@ -41,6 +50,11 @@ namespace TicTacToe
             Console.WriteLine("");
 
             return position;
+        }
+
+        public void UpdateWinCount()
+        {
+            GamesWon += 1;
         }
     }
 }

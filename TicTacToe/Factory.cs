@@ -19,10 +19,9 @@ namespace TicTacToe
 
             for (i = 0; i < numPlayers; i++)
             {
-                newPlayer[i] = new Player();
-                newPlayer[i].pChar = (PlayerChar)i;
+                newPlayer[i] = new Player(i);
             }
-
+            
             return newPlayer;
         }
     }

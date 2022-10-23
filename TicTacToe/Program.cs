@@ -8,30 +8,37 @@ namespace TicTacToe
 
         static void Main(string[] args)
         {
-            IBoard board = Factory.CreateBoard();
-            board.InitBoard();
+            bool playGame = true;
+            bool turn = false;
 
             IPlayer[] player = Factory.CreatePlayers();
-            
-            bool turn = false;
-            bool validMove = false;
 
-            while (board.gameResult == GameResult.noResult)
+            while ( playGame == true)
             {
-                int[] position = null;
+                IBoard board = Factory.CreateBoard();
+                
+                bool validMove = false;
                 int playerNum = Convert.ToInt32(turn);
 
-                while (validMove == false)
+                while (board.gameResult == GameResult.noResult)
                 {
-                    position = player[playerNum].GetMove("Player " + player[playerNum].pChar.ToString());
-                    validMove = board.AddMove(player[playerNum], Convert.ToInt32(turn), position);
+                    int[] position = null;
+                    playerNum = Convert.ToInt32(turn);
+
+                    while (validMove == false)
+                    {
+                        position = player[playerNum].GetMove();
+                        validMove = board.AddMove(player[playerNum], Convert.ToInt32(turn), position);
+                    }
+
+                    validMove = false;
+                    turn = !turn;
                 }
 
-                validMove = false;
-                turn = !turn;
-            }
+                StandardMessages.GameOverMessage(board.gameResult, player);
 
-            StandardMessages.GameOver(board.gameResult);
+                playGame = board.PlayAgain();
+            }
         }
     }
 }
