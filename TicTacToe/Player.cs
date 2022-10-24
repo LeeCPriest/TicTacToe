@@ -16,10 +16,12 @@ namespace TicTacToe
             PlayerName = "Player " + pChar.ToString();
         }
 
+
         public int[] GetMove()
         {
             char input;
-            int[] position = new int[2];
+            int numPlayers = Factory.GetPlayerCount();
+            int[] position = new int[numPlayers];
 
             StandardMessages.EnterMoveMessage(this, "Row");
             input = Console.ReadKey().KeyChar;

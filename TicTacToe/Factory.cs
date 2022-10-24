@@ -13,7 +13,7 @@ namespace TicTacToe
         public static IPlayer[] CreatePlayers()
         {
             int i;
-            int numPlayers = Enum.GetNames(typeof(PlayerChar)).Length;
+            int numPlayers = GetPlayerCount();
 
             Player[] newPlayer = new Player[numPlayers];
 
@@ -23,6 +23,12 @@ namespace TicTacToe
             }
             
             return newPlayer;
+        }
+
+        public static int GetPlayerCount()
+        {
+            int numPlayers = Enum.GetNames(typeof(PlayerChar)).Length;
+            return numPlayers;
         }
     }
 }

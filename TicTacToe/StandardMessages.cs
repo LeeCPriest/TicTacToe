@@ -9,10 +9,14 @@ namespace TicTacToe
         {
             Console.WriteLine("Game Over. Result: " + gameResult.ToString());
             Console.WriteLine("");
-            Console.Write($"{player[0].PlayerName} has won {player[0].GamesWon} games.");
-            Console.WriteLine("");
-            Console.Write($"{player[1].PlayerName} has won {player[1].GamesWon} games.");
-            Console.WriteLine("");
+
+            int i;
+            int numPlayers = Factory.GetPlayerCount();
+            for (i = 0; i < numPlayers; i++)
+            {
+                Console.Write($"{player[i].PlayerName} has won {player[i].GamesWon} games.");
+                Console.WriteLine("");
+            }
         }
 
         public static void EnterMoveMessage(IPlayer player, string RowCol)
