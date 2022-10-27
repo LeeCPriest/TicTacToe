@@ -2,7 +2,7 @@
 {
     public interface IPlayer
     {
-        int GamesWon { get; }
+        int GamesWon { get; set; }
 
         PlayerChar pChar { get; }
 
@@ -10,6 +10,6 @@
 
         int[] GetMove();
 
-        void UpdateWinCount();
+        //void UpdateWinCount();
     }
 }

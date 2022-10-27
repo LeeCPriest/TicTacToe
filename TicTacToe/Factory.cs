@@ -12,12 +12,11 @@ namespace TicTacToe
 
         public static IPlayer[] CreatePlayers()
         {
-            int i;
             int numPlayers = GetPlayerCount();
 
             Player[] newPlayer = new Player[numPlayers];
 
-            for (i = 0; i < numPlayers; i++)
+            for (int i = 0; i < numPlayers; i++)
             {
                 newPlayer[i] = new Player(i);
             }

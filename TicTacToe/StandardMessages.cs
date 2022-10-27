@@ -5,16 +5,14 @@ namespace TicTacToe
     internal class StandardMessages
     {
                
-        public static void GameOverMessage(GameResult gameResult, IPlayer[] player)
+        public static void GameOverMessage(GameResult gameResult, IPlayer[] players)
         {
             Console.WriteLine("Game Over. Result: " + gameResult.ToString());
             Console.WriteLine("");
 
-            int i;
-            int numPlayers = Factory.GetPlayerCount();
-            for (i = 0; i < numPlayers; i++)
+            foreach (var player in players)
             {
-                Console.Write($"{player[i].PlayerName} has won {player[i].GamesWon} games.");
+                Console.Write($"{player.PlayerName} has won {player.GamesWon} games.");
                 Console.WriteLine("");
             }
         }

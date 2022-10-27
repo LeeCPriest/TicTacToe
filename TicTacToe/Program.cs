@@ -13,7 +13,7 @@ namespace TicTacToe
 
             IPlayer[] player = Factory.CreatePlayers();
 
-            while ( playGame == true)
+            while ( playGame == true  )
             {
                 IBoard board = Factory.CreateBoard();
                 

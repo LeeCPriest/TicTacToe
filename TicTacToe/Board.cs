@@ -12,12 +12,9 @@ namespace TicTacToe
 
         public Board()
         {
-            int row;
-            int col;
-
-            for (row = 0; row < 3; row++)
+            for (int row = 0; row < 3; row++)
             {
-                for (col = 0; col < 3; col++)
+                for (int col = 0; col < 3; col++)
                 {
                     GameBoard[row, col] = blankChar;
                 }
@@ -53,17 +50,14 @@ namespace TicTacToe
 
         private void DrawBoard()
         {
-            int row;
-            int col;
-
             Console.Clear();
             Console.WriteLine("");
 
-            for (row = 0; row < 3; row++)
+            for (int row = 0; row < 3; row++)
             {
                 string lineText = "";
 
-                for (col = 0; col < 3; col++)
+                for (int col = 0; col < 3; col++)
                 {
                     lineText += GameBoard[row, col] + " ";
                 }
@@ -78,11 +72,9 @@ namespace TicTacToe
         {
             GameResult result = GameResult.noResult;
 
-            int row;
-            int col;
             bool noMoreMoves = true;
 
-            for (row = 0; row < 3; row++)
+            for (int row = 0; row < 3; row++)
             {
                 string rowVals = GameBoard[row, 0] + GameBoard[row, 1] + GameBoard[row, 2];
                 if (rowVals == "XXX")
@@ -98,7 +90,7 @@ namespace TicTacToe
                 if (rowVals.Contains(blankChar) == true) { noMoreMoves = false; } // if a blank character is found, there are available moves remaining
             }
 
-            for (col = 0; col < 3; col++)
+            for (int col = 0; col < 3; col++)
             {
                 string rowVals = GameBoard[0, col] + GameBoard[1, col] + GameBoard[2, col];
                 if (rowVals == "XXX")
@@ -123,7 +115,7 @@ namespace TicTacToe
 
             if (result != GameResult.X_wins && result != GameResult.O_wins && noMoreMoves == true) { result = GameResult.Draw; }
             else if (result != GameResult.noResult ) 
-            { player.UpdateWinCount(); }
+            { player.GamesWon +=1; }
             
 
             gameResult = result;

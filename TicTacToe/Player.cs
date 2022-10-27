@@ -53,10 +53,5 @@ namespace TicTacToe
 
             return position;
         }
-
-        public void UpdateWinCount()
-        {
-            GamesWon += 1;
-        }
     }
 }
