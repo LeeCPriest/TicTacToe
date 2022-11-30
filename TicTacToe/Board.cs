@@ -100,13 +100,13 @@ namespace TicTacToe
 
             for (col = 0; col < 3; col++)
             {
-                string rowVals = GameBoard[0, col] + GameBoard[1, col] + GameBoard[2, col];
-                if (rowVals == "XXX" )
+                string colVals = GameBoard[0, col] + GameBoard[1, col] + GameBoard[2, col];
+                if (colVals == "XXX" )
                 {
                     result = GameResult.X_wins;
                     break;
                 }
-                if (rowVals == "OOO")
+                if (colVals == "OOO")
                 {
                     result = GameResult.O_wins;
                     break;
@@ -118,8 +118,8 @@ namespace TicTacToe
             if (xVal1 == "OOO") { result = GameResult.O_wins; }
 
             string xVal2 = GameBoard[2, 0] + GameBoard[1, 1] + GameBoard[0, 2];
-            if (xVal1 == "XXX") { result = GameResult.X_wins; }
-            if (xVal1 == "OOO") { result = GameResult.O_wins; }
+            if (xVal2 == "XXX") { result = GameResult.X_wins; }
+            if (xVal2 == "OOO") { result = GameResult.O_wins; }
 
             if (result!= GameResult.X_wins && result !=GameResult.O_wins && noMoreMoves == true) { result = GameResult.Draw; }
 
